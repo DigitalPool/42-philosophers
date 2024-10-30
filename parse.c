@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:26:34 by mac               #+#    #+#             */
-/*   Updated: 2024/10/30 14:15:57 by mac              ###   ########.fr       */
+/*   Updated: 2024/10/30 19:07:24 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,15 @@ long ft_aftol(char *arg)
 	long ret = 0;
 	int i = 0;
 
-	// Skip leading whitespace
 	while (isspace(arg[i]))
 		i++;
-
-	// Skip any '+' sign, and ignore '-' to allow only positive numbers
 	if (arg[i] == '+')
 		i++;
 	else if (arg[i] == '-')
-		return 0;  // Return 0 if a '-' is encountered
-
-	// Convert the remaining digits to a long integer
+		return 0;
 	while (isdigit(arg[i])) {
 		ret = ret * 10 + (arg[i] - '0');
 		i++;
 	}
-
 	return ret;
 }

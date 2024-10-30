@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:39:44 by mac               #+#    #+#             */
-/*   Updated: 2024/10/30 16:10:54 by mac              ###   ########.fr       */
+/*   Updated: 2024/10/30 17:51:02 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,3 +101,4 @@ void	*dinner_simulation (void *data);
 
 //safe write
 void safe_write(t_table *table, char *status, int philo_id);
+void safe_write_died(t_table *table, char *status, int philo_id);
