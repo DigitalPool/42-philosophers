@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:39:44 by mac               #+#    #+#             */
-/*   Updated: 2024/10/30 17:51:02 by mac              ###   ########.fr       */
+/*   Updated: 2024/10/31 12:53:32 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ typedef struct	s_philos
 	t_forks 	philo_right_fork;
 	t_forks		philo_left_fork;
 	long		time_since_last_meal;
+	long		new_meal; //
 	long		time_has_slept;
 	long		born_time;
 	t_table		*table;
-	long		meals_counter;
+	int			meals_counter;
 	t_mtx		philo_mutex;
 	pthread_t	thread_id;
 }				t_philos;
@@ -102,3 +103,4 @@ void	*dinner_simulation (void *data);
 //safe write
 void safe_write(t_table *table, char *status, int philo_id);
 void safe_write_died(t_table *table, char *status, int philo_id);
+void monitor_philos(t_table *table, int philo_id);

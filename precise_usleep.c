@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 18:42:12 by mac               #+#    #+#             */
-/*   Updated: 2024/10/30 18:48:36 by mac              ###   ########.fr       */
+/*   Updated: 2024/10/31 07:34:11 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,3 +72,4 @@ void	take_time_doing(t_table *table, long unsigned int time_to_take)
 	}
 	return ;
 }
+

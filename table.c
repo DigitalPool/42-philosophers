@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:14:17 by mac               #+#    #+#             */
-/*   Updated: 2024/10/31 00:28:00 by mac              ###   ########.fr       */
+/*   Updated: 2024/10/31 12:54:46 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void table_init(t_table *table)
 		table->philos[j].philo_right_fork = table->forks[j];
 		table->philos[j].philo_left_fork = table->forks[(j + 1) % table->philo_nbr];
 		table->philos[j].time_since_last_meal = gettime(MILLISECOND);
+		table->philos[j].new_meal = gettime(MILLISECOND);//
 		table->philos[j].born_time = gettime(MILLISECOND);
 		table->philos[j].time_has_slept = 0;
 		table->philos[j].meals_counter = 0;
@@ -60,11 +61,8 @@ void dinner_start(t_table *table)
 	j = -1;
 	if (table->philo_nbr == 1)
 		{
-			// handle_one_philo()
-			printf("%d	", 0);
-			safe_write(table, "has taken right fork", table->philos->philo_id);
-			printf("%ld	", table->time_to_die/1000);
-			safe_write_died(table, "died", table->philos->philo_id);
+			printf(GREEN"%d"RST	"	1 has taken a fork\n", 0);
+			printf(RED"%ld"RST	"	1 died\n", table->time_to_die/1000);
 			//clean table //TODO
 			exit(0);
 		}
@@ -100,6 +98,7 @@ void	*dinner_simulation(void *data)
 	pthread_mutex_unlock(&philo->table->table_mutex);
 	//dpetrosy
 
+	
 	while (philo->table->simulation_running)
 	{
 		int right_fork_index = philo->philo_id - 1;
@@ -108,22 +107,17 @@ void	*dinner_simulation(void *data)
 		long current_time = gettime(MILLISECOND);
 
 		pthread_mutex_lock(&philo->table->forks[right_fork_index].fork_mutex);
+		monitor_philos(philo->table, philo->philo_id);
 		safe_write(philo->table, "has taken right fork", philo->philo_id);
-
 		pthread_mutex_lock(&philo->table->forks[left_fork_index].fork_mutex);
 		safe_write(philo->table, "has taken left fork", philo->philo_id);
 
-		if ((current_time - philo->table->philos[philo->philo_id].time_since_last_meal ) > philo->table->time_to_die)
-		{
-			safe_write_died(philo->table, "died", philo->philo_id);
-			philo->table->simulation_running = false;
-			exit(0);
-		}
-
 		pthread_mutex_lock(&philo->table->table_mutex);
+
 		safe_write(philo->table, "is eating", philo->philo_id);
-		philo->table->philos[philo->philo_id].time_since_last_meal = gettime(MILLISECOND);
-		philo->meals_counter++;
+
+		philo->table->philos[philo->philo_id - 1].meals_counter++;
+
 		pthread_mutex_unlock(&philo->table->table_mutex);
 		precise_usleep(philo->table->time_to_eat);
 
@@ -135,6 +129,75 @@ void	*dinner_simulation(void *data)
 
 		safe_write(philo->table, "is thinking", philo->philo_id);
 		current_time = gettime(MILLISECOND);
+
 	}
 	return (NULL);
 }
+
+
+
+
+// void	*dinner_simulation(void *data)
+// {
+//  	int right_fork_index;
+// 	int left_fork_index;
+// 	t_philos *philo;
+
+// 	philo = (t_philos *)data;
+
+// 	if (philo->philo_id % 2 == 0)
+// 		precise_usleep(200);
+
+// 	//dpetrosy
+// 	pthread_mutex_lock(&philo->table->table_mutex);
+// 	philo->born_time = gettime(MILLISECOND);
+// 	pthread_mutex_unlock(&philo->table->table_mutex);
+// 	//dpetrosy
+
+// 	while (philo->table->simulation_running)
+// 	{
+// 		int right_fork_index = philo->philo_id - 1;
+// 		int left_fork_index = (philo->philo_id) % philo->table->philo_nbr;
+
+// 		long current_time = gettime(MILLISECOND);
+
+// 		pthread_mutex_lock(&philo->table->forks[right_fork_index].fork_mutex);
+// 		safe_write(philo->table, "has taken right fork", philo->philo_id);
+
+// 		pthread_mutex_lock(&philo->table->forks[left_fork_index].fork_mutex);
+// 		safe_write(philo->table, "has taken left fork", philo->philo_id);
+
+// 		printf("%d philo->table->time_to_die: %ld\n", philo->philo_id, philo->table->time_to_die/1000);
+// 		printf("%d philo->current_time: %ld\n", philo->philo_id, current_time);
+// 		printf("%d philo->time_since_last_meal: %ld\n", philo->philo_id, philo->table->philos[philo->philo_id - 1].time_since_last_meal);
+// 		printf("%d possible time to die: %ld\n", philo->philo_id, current_time - philo->table->philos[philo->philo_id - 1].time_since_last_meal);
+
+// 		if (((current_time - philo->table->philos[philo->philo_id - 1].time_since_last_meal) > philo->table->time_to_die/1000)
+// 				&& philo->meals_counter > 1)
+// 		{
+// 			safe_write_died(philo->table, "died", philo->philo_id);
+// 			philo->table->simulation_running = false;
+// 			exit(0);
+// 		}
+
+// 		pthread_mutex_lock(&philo->table->table_mutex);
+// 		safe_write(philo->table, "is eating", philo->philo_id);
+// 		philo->table->philos[philo->philo_id - 1].time_since_last_meal = gettime(MILLISECOND);
+
+// 		philo->table->philos[philo->philo_id - 1].meals_counter++;
+// 		printf("Philosopher %d: meals_counter=%d\n", philo->table->philos[philo->philo_id - 1].philo_id, philo->meals_counter);
+
+// 		pthread_mutex_unlock(&philo->table->table_mutex);
+// 		precise_usleep(philo->table->time_to_eat);
+
+// 		pthread_mutex_unlock(&philo->table->forks[right_fork_index].fork_mutex);
+// 		pthread_mutex_unlock(&philo->table->forks[left_fork_index].fork_mutex);
+
+// 		safe_write(philo->table, "is sleeping", philo->philo_id);
+// 		precise_usleep(philo->table->time_to_sleep);
+
+// 		safe_write(philo->table, "is thinking", philo->philo_id);
+// 		current_time = gettime(MILLISECOND);
+// 	}
+// 	return (NULL);
+// }
