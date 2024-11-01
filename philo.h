@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:39:44 by mac               #+#    #+#             */
-/*   Updated: 2024/11/01 02:33:22 by mac              ###   ########.fr       */
+/*   Updated: 2024/11/01 03:52:09 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ typedef struct s_table
 long			ft_aftol(char *arg);
 void			parse_args(char **argv, t_table *table);
 
-//table_init
-void table_init(t_table *table);
+//init
+void			init_philos(t_table *table);
+void			init_mutexes(t_table *table);
+void			table_init(t_table *table);
 
 //precise u_sleep
 void			precise_usleep(long usec);
@@ -105,4 +107,4 @@ void			safe_write_died(t_table *table, char *status, int philo_id);
 void			monitor_philos(t_table *table, int philo_id);
 
 // clean everything my love
-void	clean_dinner(t_table *table);
+void			clean_dinner(t_table *table);

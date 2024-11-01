@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:26:34 by mac               #+#    #+#             */
-/*   Updated: 2024/10/31 07:34:26 by mac              ###   ########.fr       */
+/*   Updated: 2024/11/01 03:55:25 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 
 // ./philo * * * * [*]
 //no_philo die eat sleep must_eat
+
+#include <stdbool.h>
+
+static int	ft_isspace(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' ||
+			c == '\v' || c == '\f' || c == '\r');
+}
+
+static int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
 
 void parse_args(char **argv, t_table *table)
 {
@@ -26,7 +39,7 @@ void parse_args(char **argv, t_table *table)
 		|| table->time_to_sleep < 60000)
 	{
 		printf(RED"wrong input. time less than 60 secs\n"RST);
-		exit(1);
+		clean_dinner(table);
 	}
 	if(argv[5])
 		table->must_eat = ft_aftol(argv[5]);
@@ -39,16 +52,16 @@ long ft_aftol(char *arg)
 	long ret = 0;
 	int i = 0;
 
-	while (isspace(arg[i]))
+	while (ft_isspace(arg[i]))
 		i++;
 	if (arg[i] == '+')
 		i++;
 	else if (arg[i] == '-')
 		return 0;
-	while (isdigit(arg[i])) {
+	while (ft_isdigit(arg[i]))
+	{
 		ret = ret * 10 + (arg[i] - '0');
 		i++;
 	}
 	return ret;
 }
-
