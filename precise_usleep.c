@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 18:42:12 by mac               #+#    #+#             */
-/*   Updated: 2024/10/31 07:34:11 by mac              ###   ########.fr       */
+/*   Updated: 2024/11/01 01:58:18 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,7 @@ void	precise_usleep(long usec)
 
 	start = gettime(MICROSECOND);
 	while (gettime(MICROSECOND) - start < usec)
-	{
-
 		usleep(500);
-		// elapsed = gettime(MICROSECOND) - start;
-		// 	rem = usec - elapsed;
-		// if (rem > 1e3)
-		// 	usleep (rem / 2);
-		// else
-		// {
-		// 	while (gettime(MICROSECOND) - start < usec)
-		// 	;
-		// }
-	}
 }
 
 void	take_time_doing(t_table *table, long unsigned int time_to_take)

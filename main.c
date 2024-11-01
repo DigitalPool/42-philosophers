@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:43:26 by mac               #+#    #+#             */
-/*   Updated: 2024/10/31 07:35:48 by mac              ###   ########.fr       */
+/*   Updated: 2024/11/01 02:27:37 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 // ./philo * * * * [*]
 //no_philo die eat sleep must_eat
-
 
 int	main (int argc, char **argv)
 {
@@ -25,7 +24,7 @@ int	main (int argc, char **argv)
 		parse_args(argv, &table);
 		table_init(&table);
 		dinner_start(&table);
-		// clean_dinner();
+		clean_dinner(&table);
 	}
 	else
 	{
@@ -33,5 +32,3 @@ int	main (int argc, char **argv)
 		return (1);
 	}
 }
-
-

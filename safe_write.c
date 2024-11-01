@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 06:45:03 by mac               #+#    #+#             */
-/*   Updated: 2024/10/31 12:59:41 by mac              ###   ########.fr       */
+/*   Updated: 2024/11/01 02:32:24 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,19 @@ void monitor_philos(t_table *table, int philo_id)
 	}
 	table->philos[philo_id - 1].time_since_last_meal = table->philos[philo_id - 1].new_meal;
 	pthread_mutex_unlock(&table->table_mutex);
+}
 
-	// pthread_mutex_lock(&table->table_mutex);
-	// if (table->philos->meals_counter == table->must_eat)
-	// {
+void	clean_dinner(t_table *table)
+{
+	int	i;
 
-	// }
-	// pthread_mutex_unlock(&table->table_mutex);
+	i = -1;
+	while (++i < table->philo_nbr)
+	{
+		pthread_mutex_destroy(&table->philos[i].philo_mutex);
+		pthread_mutex_destroy(&table->forks[i].fork_mutex);
+	}
+	pthread_mutex_destroy(&table->table_mutex);
+	pthread_mutex_destroy(&table->write_mutex);
+	pthread_mutex_destroy(&table->must_eat_mutex);
 }

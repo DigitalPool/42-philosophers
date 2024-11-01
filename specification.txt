@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    specification.txt                                  :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mac <mac@student.42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/01 02:00:58 by mac               #+#    #+#              #
+#    Updated: 2024/11/01 02:01:08 by mac              ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 one or more philosophers sit at a round table.
 
@@ -17,7 +28,6 @@ There are as many forks as philosophers.
 
 Because serving and eating spaghetti with only one fork is very inconvenient,
 a philosopher takes their right and their left forks to eat, one in each hand.
-
 
 When a philosopher has finished eating, they put their forks back on the table and start sleeping.
 
@@ -46,7 +56,4 @@ Any state change of a philosopher must be formatted as follows:
 ◦ timestamp_in_ms X died
 Replace timestamp_in_ms with the current timestamp in milliseconds and X with the philosopher number.
 
-
-
 *** Your program must not have any data races.
-
