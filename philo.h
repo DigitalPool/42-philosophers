@@ -6,9 +6,12 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:39:44 by mac               #+#    #+#             */
-/*   Updated: 2024/11/01 03:52:09 by mac              ###   ########.fr       */
+/*   Updated: 2024/11/03 08:21:21 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef PHILO_H
+#define	PHILO_H
 
 #include <stdio.h> //printf
 #include <unistd.h> //write
@@ -42,14 +45,13 @@ typedef enum	e_time_code
 }				t_time_code;
 
 typedef 		pthread_mutex_t t_mtx;
+typedef struct	s_table t_table;
 
 typedef struct	s_forks
 {
 	int			fork_id;
 	t_mtx		fork_mutex;
 }				t_forks;
-
-typedef struct	s_table t_table;
 
 typedef struct	s_philos
 {
@@ -95,11 +97,11 @@ void			table_init(t_table *table);
 //precise u_sleep
 void			precise_usleep(long usec);
 long			gettime(t_time_code time_code);
-void			take_time_doing(t_table *table, long unsigned int time_to_take);
+void	take_time_doing(long unsigned int time_to_take);
 
 //dinner starts. why not?
 void			dinner_start(t_table *table);
-void			*dinner_simulation (void *data);
+void			*dinner_simulation(void *data);
 
 //safe write
 void			safe_write(t_table *table, char *status, int philo_id);
@@ -108,3 +110,5 @@ void			monitor_philos(t_table *table, int philo_id);
 
 // clean everything my love
 void			clean_dinner(t_table *table);
+
+#endif

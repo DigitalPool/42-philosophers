@@ -6,14 +6,14 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 04:03:58 by mac               #+#    #+#             */
-/*   Updated: 2024/11/01 04:06:15 by mac              ###   ########.fr       */
+/*   Updated: 2024/11/03 08:31:44 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 
-void			init_philos(t_table *table)
+void	init_philos(t_table *table)
 {
 	int i;
 
@@ -35,7 +35,7 @@ void			init_philos(t_table *table)
 		table->forks[i].fork_id = i + 1;
 	}
 }
-void			init_mutexes(t_table *table)
+void	init_mutexes(t_table *table)
 {
 	int j;
 
@@ -45,19 +45,24 @@ void			init_mutexes(t_table *table)
 		pthread_mutex_init(&table->philos[j].philo_mutex, NULL);
 		table->philos[j].philo_id = j + 1;
 		table->philos[j].philo_right_fork = table->forks[j];
-		table->philos[j].philo_left_fork = table->forks[(j + 1) % table->philo_nbr];
+		table->philos[j].philo_left_fork
+			= table->forks[(j + 1) % table->philo_nbr];
 		table->philos[j].time_since_last_meal = gettime(MILLISECOND);
-		table->philos[j].new_meal = gettime(MILLISECOND);//
+		table->philos[j].new_meal = gettime(MILLISECOND);
 		table->philos[j].born_time = gettime(MILLISECOND);
 		table->philos[j].time_has_slept = 0;
+		table->philos[j].time_since_last_meal = 0;
 		table->philos[j].meals_counter = 0;
 		table->philos[j].table = table;
+		table->philos[j].thread_id = 0;
 	}
 }
 
 
-void table_init(t_table *table)
+void	table_init(t_table *table)
 {
 	init_philos(table);
 	init_mutexes(table);
+	table->start_simulation = 0;
+	
 }

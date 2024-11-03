@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 18:42:12 by mac               #+#    #+#             */
-/*   Updated: 2024/11/01 01:58:18 by mac              ###   ########.fr       */
+/*   Updated: 2024/11/03 06:48:59 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,13 @@ long gettime(t_time_code time_code)
 void	precise_usleep(long usec)
 {
 	long start;
-	long elapsed;
-	long rem;
 
 	start = gettime(MICROSECOND);
 	while (gettime(MICROSECOND) - start < usec)
 		usleep(500);
 }
 
-void	take_time_doing(t_table *table, long unsigned int time_to_take)
+void	take_time_doing(long unsigned int time_to_take)
 {
 	unsigned int	start;
 	unsigned int	current;
