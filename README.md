@@ -1,5 +1,6 @@
 # 🍝 42 Philosophers – Dining with a Twist! 🍝
 
+![github_philosophers_42](https://github.com/user-attachments/assets/d6ff7e7d-ba44-4e9d-92c8-fb29f2ae43cb)
 Welcome to **42 Philosophers**, a project where classic problem-solving meets concurrent programming! Inspired by Edsger Dijkstra’s **Dining Philosophers Problem**, this project teaches us the art of managing shared resources and avoiding deadlock in a multi-threaded environment. Here’s everything you need to know to tackle this project and emerge victorious! 🏆
 
 ---
@@ -9,6 +10,7 @@ Welcome to **42 Philosophers**, a project where classic problem-solving meets co
 Imagine philosophers sitting around a table with a single bowl of spaghetti. To eat, each philosopher needs two forks, yet there are only as many forks as philosophers. The challenge? Ensuring each philosopher can eat, sleep, and think without anyone starving or creating a deadlock.
 
 **Objectives**:
+
 1. **Mandatory Part**: Use **threads** and **mutexes** to manage shared resources.
 2. **Bonus Part**: Implement with **processes** and **semaphores** for enhanced resource management.
 
