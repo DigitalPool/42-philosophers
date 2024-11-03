@@ -69,11 +69,11 @@ For the mandatory part:
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/YourUsername/42-Philosophers.git
+   git clone https://github.com/DigitalPool/42-Philosophers.git
    ```
 2. Navigate to the `philo` directory and compile:
    ```bash
-   cd 42-Philosophers/philo && make
+   cd 42-Philosophers && make
    ```
 3. Run the program:
    ```bash
