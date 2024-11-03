@@ -1,6 +1,8 @@
 # 🍝 42 Philosophers – Dining with a Twist! 🍝
 
 ![github_philosophers_42](https://github.com/user-attachments/assets/d6ff7e7d-ba44-4e9d-92c8-fb29f2ae43cb)
+
+
 Welcome to **42 Philosophers**, a project where classic problem-solving meets concurrent programming! Inspired by Edsger Dijkstra’s **Dining Philosophers Problem**, this project teaches us the art of managing shared resources and avoiding deadlock in a multi-threaded environment. Here’s everything you need to know to tackle this project and emerge victorious! 🏆
 
 ---
